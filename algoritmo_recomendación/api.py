@@ -24,6 +24,7 @@ class MiniTransformer(nn.Module):
 
 # --- Cargar modelo entrenado ---
 checkpoint = torch.load("transformer_mercadona.pth")
+#checkpoint = torch.load("transformer_alejandro.pth")
 model = MiniTransformer(vocab_size=len(checkpoint['vocab']))
 model.load_state_dict(checkpoint['model_state_dict'])
 model.eval()
