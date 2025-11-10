@@ -1,11 +1,21 @@
 #uvicorn api:app --host 0.0.0.0 --port 8000 --reload
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # puedes poner ["http://localhost:3000"] para frontend específico
+    allow_credentials=True,
+    allow_methods=["*"],  # permite GET, POST, OPTIONS, etc.
+    allow_headers=["*"],
+)
 
 class MiniTransformer(nn.Module):
     def __init__(self, vocab_size, d_model=64, nhead=4, num_layers=1):
