@@ -1,3 +1,5 @@
+#uvicorn api:app --host 0.0.0.0 --port 8000 --reload
+
 from fastapi import FastAPI
 from pydantic import BaseModel
 import torch
@@ -23,8 +25,9 @@ class MiniTransformer(nn.Module):
 
 
 # --- Cargar modelo entrenado ---
-checkpoint = torch.load("transformer_mercadona.pth")
+#checkpoint = torch.load("transformer_mercadona.pth")
 #checkpoint = torch.load("transformer_alejandro.pth")
+checkpoint = torch.load("transformer_mercadona_julio.pth")
 model = MiniTransformer(vocab_size=len(checkpoint['vocab']))
 model.load_state_dict(checkpoint['model_state_dict'])
 model.eval()
